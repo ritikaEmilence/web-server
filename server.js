@@ -6,18 +6,8 @@ var app = express();
 // res.send('Hello Express!');
 
 // });
-var middleware = {
-	requireAuthentication:function(req,res,next)
-	{
-		console.log('private route hit');
-		next();
-	},
-	logger: function(req,res,next)
-	{
-		console.log(new Date().toString() + ' ' + req.method + ' ' + req.originalUrl);
-		next();
-	}
-};
+var middleware = require('./middleware.js');
+
 app.use(middleware.logger);
 
 app.get('/about',middleware.requireAuthentication,function (req, res)
